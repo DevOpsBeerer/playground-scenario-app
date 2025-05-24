@@ -1,8 +1,113 @@
-.git
-node_modules
-dist
-.vscode
-.angular
+# =============================================================================
+# .dockerignore - Exclude unnecessary files from Docker build context
+# =============================================================================
 
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Angular
+dist/
+.angular/
+.ng_build_info/
+.ng_pkg_build/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile*
+.dockerignore
+docker-compose*.yml
+
+# Documentation
+README.md
+*.md
+docs/
+
+# Testing
+coverage/
+.nyc_output/
+.coverage/
+*.lcov
+
+# Environment files (keep only example files)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories that might contain native modules
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Build tools
+.cache/
+.parcel-cache/
+
+# Temporary folders
+tmp/
+temp/
+
+# ESLint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional stylelint cache
+.stylelintcache
+
+# SvelteKit build / generate output
+.svelte-kit
+
+# End of https://www.gitignore.io/api/node
+
+# Ignore specific configuration files
+# These files contains environment-specific
 public/config.json
 public/auth.json

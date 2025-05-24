@@ -1,18 +1,55 @@
-FROM docker.io/node:23.11.0-slim@sha256:dfb18d8011c0b3a112214a32e772d9c6752131ffee512e974e59367e46fcee52 AS build
+# =============================================================================
+# Alternative Dockerfile using nginx-unprivileged image
+# This avoids permission issues by using a pre-configured non-root nginx
+# =============================================================================
 
-WORKDIR /usr/app
+# -----------------------------------------------------------------------------
+# Stage 1: Build the Angular application
+# -----------------------------------------------------------------------------
+FROM docker.io/node:24-alpine AS builder
 
-COPY package*.json .
+# Add metadata labels
+LABEL stage=builder
+LABEL description="Build stage for Angular application"
 
-RUN npm ci
+# Set working directory
+WORKDIR /app
 
+# Copy package files first for better layer caching
+COPY package*.json ./
+
+# Install dependencies with clean install for reproducible builds
+RUN npm ci --no-audit --no-fund && \
+    npm cache clean --force
+
+# Copy source code
 COPY . .
 
+# Build the application for production
 RUN npm run build
 
-FROM docker.io/nginx:1.27.5-alpine3.21-slim
+# -----------------------------------------------------------------------------
+# Stage 2: Serve with nginx-unprivileged
+# -----------------------------------------------------------------------------
+FROM docker.io/nginxinc/nginx-unprivileged:1.27-alpine AS runtime
 
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/app/dist/devopsbeerer-frontoffice/browser/ /usr/share/nginx/html
+# Add metadata labels
+LABEL maintainer="DevopsBeerer Team"
+LABEL description="DevopsBeerer Front Office - OAuth2/OIDC Angular SPA"
+LABEL version="1.0.0"
 
-EXPOSE 80
+# Only override server config
+COPY default.conf /etc/nginx/conf.d/default.conf 
+
+# Copy built application from builder stage
+COPY --from=builder --chown=nginx:nginx /app/dist/devopsbeerer-frontoffice/browser/ /usr/share/nginx/html/
+
+# The nginx-unprivileged image runs on port 8080 by default
+EXPOSE 8080
+
+# Health check to ensure the application is running
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:8080/ || exit 1
+
+# No need to specify user - nginx-unprivileged handles this
+# No need to specify CMD - inherited from base image
