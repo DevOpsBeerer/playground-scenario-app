@@ -1,59 +1,108 @@
-# DevopsbeererFrontoffice
+# DevopsBeerer Front Office
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+A Single Page Application (SPA) demonstrating **OAuth2/OIDC Authorization Code Flow with PKCE** for public clients. This Angular application is part of the **DevopsBeerer playground** - an educational platform designed to help developers understand OAuth2 and OIDC standards through practical, hands-on examples.
 
-## Development server
+## 🍺 About the Project
 
-To start a local development server, run:
+**DevopsBeerer** is a comprehensive playground that makes OAuth2 and OIDC concepts accessible through a fun beer management scenario. This front office application serves as the **public client** demonstration, showcasing how modern web applications securely authenticate users and access protected APIs.
 
-```bash
-ng serve
-```
+### Key Concepts Demonstrated
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Authorization Code Flow with PKCE** - The secure OAuth2 flow for public clients
+- **Token Management** - How to handle ID tokens and access tokens
+- **Protected API Calls** - Making authenticated requests to backend services
+- **Silent Token Renewal** - Maintaining user sessions seamlessly
+- **Public Client Security** - Best practices for browser-based applications
 
-## Code scaffolding
+## 🏗️ Application Features
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+The application provides a simple beer management interface to demonstrate real-world OAuth2 scenarios:
 
-```bash
-ng generate component component-name
-```
+- **Authentication Flow**: Login/logout with Keycloak OIDC provider
+- **Beer Management**: Create, list, and delete beers (demonstrating different API scopes)
+- **Token Inspection**: View and examine JWT tokens in a user-friendly format
+- **Protected Routes**: Access control based on authentication status
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🚀 Development Setup
 
-```bash
-ng generate --help
-```
+### Prerequisites
 
-## Building
+- Node.js (Latest LTS version recommended)
+- Angular CLI 19.2.0 or higher
+- Access to a Keycloak instance (configured in `public/auth.json`)
 
-To build the project run:
+### Getting Started
 
-```bash
-ng build
-```
+1. **Install dependencies**
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+   ```bash
+   npm install
+   ```
 
-## Running unit tests
+2. **Configure authentication**
+   Update `public/auth.json` with your Keycloak settings:
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+   ```json
+   {
+     "authority": "http://localhost:8080/realms/your-realm",
+     "redirectUrl": "http://localhost:4200/callback",
+     "clientId": "your-client-id"
+   }
+   ```
 
-```bash
-ng test
-```
+3. **Configure API endpoints**
+   Update `public/config.json` with your backend API:
 
-## Running end-to-end tests
+   ```json
+   {
+     "devopsbeerUrl": "http://localhost:3000",
+     "version": "v1.0.0"
+   }
+   ```
 
-For end-to-end (e2e) testing, run:
+4. **Start development server**
 
-```bash
-ng e2e
-```
+   ```bash
+   ng serve
+   ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+   Navigate to `http://localhost:4200/`
 
-## Additional Resources
+### Available Scripts
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- `ng serve` - Start development server
+- `ng build` - Build for production
+- `ng test` - Run unit tests
+- `ng generate --help` - View available generators
+
+## 🔧 Development Notes
+
+### Dynamic Configuration
+
+The application loads configuration dynamically at startup, allowing for environment-specific settings without rebuilding the application.
+
+### Authentication Integration
+
+Uses `angular-auth-oidc-client` library for robust OIDC implementation with built-in security best practices.
+
+### API Integration
+
+Demonstrates proper bearer token usage with automatic token attachment to protected API calls.
+
+## 📚 Learning Objectives
+
+By exploring and developing with this application, you'll understand:
+
+- How PKCE protects public clients from authorization code interception
+- The difference between ID tokens and access tokens
+- How to implement secure token storage in browser applications
+- Best practices for handling token expiration and renewal
+- Proper scope management for API access control
+
+## 🤝 Contributing
+
+This is an educational project that evolves based on community feedback and OAuth2/OIDC standard updates. The codebase is designed to be readable and educational rather than production-optimized.
+
+---
+
+*Part of the DevopsBeerer playground - Making OAuth2 and OIDC standards accessible through practical examples* 🍻
