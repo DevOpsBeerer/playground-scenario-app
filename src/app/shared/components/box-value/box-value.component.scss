@@ -1,0 +1,56 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.name {
+    text-transform: uppercase;
+    color: #AAAAAA;
+    font-size: 12px;
+}
+
+.values {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .value {
+        font-size: 14px;
+        font-weight: 500;
+        background-color: var(--secondary-color);
+        height: 32px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        gap: 8px;
+
+        lucide-icon {
+            height: 14px;
+        }
+    }
+
+    &.valuesStyle-box {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    &.values-warning {
+        .value {
+            color: rgb(237, 188, 81);
+        }
+    }
+
+    &.values-danger {
+        .value {
+            color: rgb(237, 81, 94);
+        }
+    }
+
+    &.values-success {
+        .value {
+            color: rgb(81, 237, 162);
+        }
+    }
+}

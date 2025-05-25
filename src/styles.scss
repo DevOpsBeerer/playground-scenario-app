@@ -58,8 +58,6 @@ p {
 
 h1 {
     font-size: 32px;
-    line-height: auto;
-    color: var(--primary-color);
 }
 
 h2 {
@@ -100,4 +98,33 @@ article .content {
 
 article:not(:first-of-type) {
     margin-top: 100px;
+}
+
+button {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 4px;
+    color: var(--white-color);
+    font-size: 16px;
+    height: 32px;
+    padding: 0 16px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.accent {
+    color: var(--primary-color);
+}
+
+.separate {
+    display: flex;
+    gap: 10px;
+    width: 950px;
+    max-width: 100%;
+    margin: auto;
+
+    .left, .right {
+        flex: 1;
+    }
 }

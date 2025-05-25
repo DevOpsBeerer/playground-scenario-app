@@ -1,0 +1,118 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border-radius: 10px;
+    background-color: var(--secondary-light-color);
+    gap: 20px;
+
+    border: 1px solid #fff;
+
+    header {
+        .text {
+            .icon {
+                background-color: rgba(255, 255, 255, 0.25);
+                color: #fff;
+            }
+        }
+    }
+
+    &.box-danger {
+        border-color: rgb(237, 81, 94);
+
+        header {
+            .text {
+                .icon {
+                    background-color: rgba(237, 81, 94, 0.5);
+                    color: rgb(237, 81, 94);
+                }
+            }
+        }
+    }
+
+    &.box-warning {
+        border-color: rgb(237, 188, 81);
+
+        header {
+            .text {
+                .icon {
+                    background-color: rgba(237, 188, 81, 0.5);
+                    color: rgb(237, 188, 81);
+                }
+            }
+        }
+    }
+
+    &.box-success {
+        border-color: rgb(81, 237, 162);
+
+        header {
+            .text {
+                .icon {
+                    background-color: rgba(81, 237, 162, 0.5);
+                    color: rgb(81, 237, 162);
+                }
+            }
+        }
+    }
+}
+
+header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .text {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        .icon {
+            display: flex;
+            height: 32px;
+            width: 32px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+
+            lucide-icon {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+
+            h3 {
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            span {
+                font-size: 14px;
+                color: #AAAAAA;
+            }
+        }
+    }
+
+    .beer-icon {
+        color: var(--primary-color);
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .value-section {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+}

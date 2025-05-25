@@ -1,24 +1,30 @@
 <app-layout>
-    <div class="banner">
-        <div class="information">Une bière irrésistible !</div>
-    </div>
-    <div class="wrapper">
-        <main>
-            <div class="token">
-                <h1>My token</h1>
-                <h2>ID token</h2>
-                <p>
-                    @if (idToken$ | async; as idToken) {
-                    <app-json-viewer [jsonData]="idToken"></app-json-viewer>
-                    }
-                </p>
-                <h2>Acess Token</h2>
-                <p>
-                    @if (accessToken$ | async; as accessToken) {
-                    <app-json-viewer [jsonData]="accessToken"></app-json-viewer>
-                    }
-                </p>
-            </div>
-        </main>
+    <div class="separate">
+        <div class="left">
+            <h1 class="title">
+                My token
+            </h1>
+        </div>
+        <div class="right">
+            @if (accessToken$ | async; as accessToken) {
+            <app-box title="Token (Access Token)" subtitle="Token fields and values">
+                <app-box-value label="audience(s)" [value]="accessToken.aud" />
+                <app-box-value label="issuer" [value]="accessToken.iss" />
+                <app-box-value label="scopes" [value]="accessToken.scope.split(' ')" variantStyle="box"
+                    [icon]="KeyRoundIcon" />
+                <app-box-value label="expiration" [value]="accessToken.exp.toString()" />
+            </app-box>
+            }
+            @if (idToken$ | async; as idToken) {
+            <app-box title="Token (Access Token)" subtitle="Token fields and values">
+                <app-box-value label="subject" [value]="idToken.sub" />
+                <app-box-value label="preferred username" [value]="idToken.preferred_username" />
+                <app-box-value label="given name" [value]="idToken.given_name" />
+                <app-box-value label="family name" [value]="idToken.family_name" />
+                <app-box-value label="name" [value]="idToken.name" />
+                <app-box-value label="email" [value]="idToken.email" />
+            </app-box>
+            }
+        </div>
     </div>
 </app-layout>

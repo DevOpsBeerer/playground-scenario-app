@@ -1,22 +1,21 @@
 <app-layout>
-    <div class="banner">
-        <div class="information">Une bière irrésistible !</div>
-    </div>
-    <div class="wrapper">
-        @if (beers$ | async; as beersResponse) {
-        @if (beersResponse.code !== 200) {
-        <app-error-box [apiError]="beersResponse"></app-error-box>
-        }
-        @else if(error) {
-        <app-error-box [apiError]="error" message=""></app-error-box>
-        }
-        @else {
-        <div class="beer-list">
-            @for (beer of beersResponse.data.data; track beer.id) {
-            <app-beer-card [beer]="beer" (deleteBeer)="deleteBeer($event)"></app-beer-card>
+    <div class="separate">
+        <div class="left">
+            <h1 class="title">
+                Welcome, <br />
+                <span class="subtitle">To your <span class="accent">OIDC Beers.</span></span>
+            </h1>
+        </div>
+        <div class="right" style="display: flex; flex-direction: column;gap: 10px;">
+            @if (auth$ | async; as auth){
+            <app-box title="Configuration" subtitle="Current configuration of the application">
+                <app-box-value label="api" [value]="configuration.devopsbeerUrl + '/' + configuration.version" />
+                <app-box-value label="authority" [value]="auth.authority" />
+                <app-box-value label="redirect uri" [value]="auth.redirectUrl" />
+                <app-box-value label="Client ID" [value]="auth.clientId" />
+                <app-box-value label="Scopes" [value]="auth.scopes" [icon]="KeyIcon" variantStyle="box" />
+            </app-box>
             }
         </div>
-        }
-        }
     </div>
 </app-layout>

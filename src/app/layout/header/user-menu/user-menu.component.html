@@ -1,7 +1,8 @@
+@if (isAuthenticated$ | async) {
 <div class="user-menu" (click)="logout()">
-    <div class="user-info">
-        <span class="greeting">Hello, </span>
-        <span class="email">{{email}}</span>
-    </div>
-    <div class="logout-hint">click to logout</div>
+    <span class="greeting">Hello, </span>
+    <span class="email">{{email}}</span>
 </div>
+} @else {
+<button (click)="login()">Login</button>
+}

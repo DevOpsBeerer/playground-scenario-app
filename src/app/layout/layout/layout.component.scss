@@ -1,10 +1,14 @@
 app-header {
-    padding: 0 64px;
     margin: auto;
-    height: 221px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: block;
+    background-color: var(--secondary-light-color);
+    margin: 10px;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+main {
+    margin-top: 64px;
 }
 
 @media screen and (max-width: 1200px) {

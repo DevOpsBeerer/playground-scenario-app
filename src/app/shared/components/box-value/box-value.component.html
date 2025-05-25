@@ -1,0 +1,19 @@
+<h4 class="name">{{label()}}</h4>
+<div [className]="'values values-'+variant() + ' valuesStyle-'+variantStyle()">
+    @if (typeof value() == "string") {
+    <span class="value">
+        @if (icon()!=null){
+        <lucide-icon [img]="icon()!" [size]="14"></lucide-icon>
+        }
+        {{value()}}
+    </span>
+    } @else {
+    @for (value of value(); track $index) {
+    <span class="value">
+        @if (icon()!=null){
+        <lucide-icon [img]="icon()!" [size]="14"></lucide-icon>
+        }
+        {{value}}</span>
+    }
+    }
+</div>

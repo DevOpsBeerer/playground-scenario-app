@@ -1,0 +1,42 @@
+<app-layout>
+    <div class="separate">
+        <div class="left">
+            <h1 class="title">
+                My beers
+            </h1>
+        </div>
+        <div class="right" style="display: flex; flex-direction: column;gap: 10px;">
+            @if (isAuthenticated$ | async) {
+            @if (beers$ | async; as beersResponse) {
+            @if (beersResponse.code !== 200) {
+            <app-box variant="danger" title="Access Denied" subtitle="You are not authorized to perform this action">
+                <app-box-value label="endpoint" value="/beers" />
+                <app-box-value label="missing scope" value="Beers.Read.All" variant="danger" [icon]="KeyRoundIcon" />
+            </app-box>
+            }
+            @else if(error) {
+            <app-error-box [apiError]="error" message=""></app-error-box>
+            }
+            @else {
+            <app-box variant="success" title="Access Granted" subtitle="You are authorized to perform this action">
+                <app-box-value label="endpoint" value="/beers" />
+            </app-box>
+            }
+            }
+            }
+            @else {
+            <app-box variant="warning" title="Authentication Required" subtitle="No authentication method si provided">
+                <app-box-value label="endpoint" value="/beers" />
+            </app-box>
+            }
+        </div>
+    </div>
+
+    @if (beerResponse) {
+    <div class="beer-list">
+        @for (beer of beerResponse.data.data; track beer.id) {
+        <app-beer-card [beer]="beer" (deleteBeer)="deleteBeer($event)"></app-beer-card>
+        }
+    </div>
+    }
+</app-layout>

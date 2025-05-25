@@ -1,0 +1,28 @@
+<div [className]="'box box-'+variant()">
+    <header>
+        <div class="text">
+            <div class="icon">
+                @if (variant() === "info") {
+                <lucide-icon [img]="InfoIcon" [size]="16"></lucide-icon>
+                }
+                @else if (variant() === "warning") {
+                <lucide-icon [img]="CircleAlertIcon" [size]="16"></lucide-icon>
+                }
+                @if (variant() === "danger") {
+                <lucide-icon [img]="ShieldAlertIcon" [size]="16"></lucide-icon>
+                }
+                @if (variant() === "success") {
+                <lucide-icon [img]="ShieldCheckIcon" [size]="16"></lucide-icon>
+                }
+            </div>
+            <div class="content">
+                <h3>{{title()}}</h3>
+                <span>{{subtitle()}}</span>
+            </div>
+        </div>
+        <lucide-icon [img]="BeerIcon" class="beer-icon" size="14"></lucide-icon>
+    </header>
+    <div class="content">
+        <ng-content></ng-content>
+    </div>
+</div>
